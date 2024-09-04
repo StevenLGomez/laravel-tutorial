@@ -16,7 +16,13 @@ Route::get('/posts/create', function () {
 })->name('posts.create');
 
 Route::post('/posts', function (Request $request) {
-    request->input('title');
-    return redirect()->route('posts.create');
+    $request->input('title');
+
+    return redirect()
+        ->route('posts.create')
+        ->with('success', 'Post is submitted! Title: ' .
+            $request->input('title') . ' Description: ' .
+            $request->input('description'));
+
 })->name('posts.store');
 
